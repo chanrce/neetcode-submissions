@@ -1,0 +1,28 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        l, r = 0, len (nums) - 1
+
+        while l <= r:
+            mid = (l+r) // 2
+            # if middle is target -> done
+            if target == nums[mid]:
+                return mid
+            
+            #left sorted portion
+            if nums[l] <= nums[mid]:
+                # if target NOT in the left side
+                if target > nums[mid] or target < nums[l]:
+                    # throw away whole left side including mid
+                    #move to the right
+                    l = mid + 1
+                else:
+                    r = mid - 1
+            # right sorted portion
+            else:
+                # if target NOT in RHS
+                if target < nums[mid] or target > nums[r]:
+                    
+                    r = mid - 1
+                else:
+                    l = mid + 1
+        return -1
